@@ -7,4 +7,4 @@ Csapattagok:
 * Kovács Márk
 
 Weboldal elérhető
-https://webtervi-production.up.railway.app/
+https://webterv1.up.railway.app/
