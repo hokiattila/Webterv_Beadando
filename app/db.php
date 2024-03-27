@@ -1,28 +1,28 @@
 <?php
 class DatabaseInteractions {
-    public $CARS =  array(
-        ["Mercedes-Benz", "CLA", "Benzin", "126 HP"],
-        ["Mercedes-Benz", "EQB", "Elektromos", "111 HP"],
-        ["BMW", "I5", "Elektromos", "80 HP"],
-        ["Peugeot", "206", "Benzin", "1233 HP"]
-    );
-
-    public $USERS = array(
-        ["1","hokia", 'alma'],
-        ["2","koltaia", "körte"],
-        ["3", "kovacsm", "szilva"]
-    );
-
-
     public function fetchCarData() : array {
-        return $this->CARS;
+        $carsArray = [];
+        $filePath = __DIR__.'\database.txt';
+        if (file_exists($filePath)) {
+            $fileHandle = fopen($filePath, "r");
+            while (($line = fgets($fileHandle)) !== false) {
+                $carDetails = explode(" ", $line, 4);
+                if (count($carDetails) == 4) {
+                    $carsArray[] = $carDetails;
+                }
+            }
+            fclose($fileHandle);
+        } else {
+            $carsArray[] = ['Error' => 'File not found.'];
+        }
+        return $carsArray;
     }
 
 
-
     public function fetchCarsByBrand(string $brand) : array|false {
+        $CARS = $this->fetchCarData();
         $foundCars = [];
-        foreach ($this->CARS as $car) {
+        foreach ($CARS as $car) {
             if ($car[0] === $brand) {
                 $foundCars[] = $car;
             }
@@ -32,8 +32,9 @@ class DatabaseInteractions {
 
     public function fetchBrandNames() : array|false {
         $brandNames = [];
-        foreach ($this->CARS as $car) {
-            $brandNames[] = $car[0]; // Adding the brand name to the array
+        $CARS = $this->fetchCarData();
+        foreach ($CARS as $car) {
+            $brandNames[] = $car[0];
         }
         return !empty($brandNames) ? $brandNames : false;
     }
@@ -43,5 +44,15 @@ class DatabaseInteractions {
         if(empty($brands)) return false;
         return array_combine($brands,$brands);
     }
+
+
+    public function insertCar(array $carDetails) : void {
+        $filePath = 'database.txt';
+        $carLine = implode(" ", $carDetails) . "\n";
+        $fileHandle = fopen($filePath, "a");
+        fwrite($fileHandle, $carLine);
+        fclose($fileHandle);
+    }
+
 
 }
