@@ -5,6 +5,3 @@ Csapattagok:
 * Hoki Attila
 * Koltai Armand 
 * Kovács Márk
-
-Weboldal elérhető
-https://webterv1.up.railway.app/
