@@ -2,7 +2,7 @@
 class DatabaseInteractions {
     public function fetchCarData() : array {
         $carsArray = [];
-        $filePath = __DIR__.'\database.txt';
+        $filePath = __DIR__.'\car_database.txt';
         if (file_exists($filePath)) {
             $fileHandle = fopen($filePath, "r");
             while (($line = fgets($fileHandle)) !== false) {
@@ -47,7 +47,7 @@ class DatabaseInteractions {
 
 
     public function insertCar(array $carDetails) : void {
-        $filePath = 'database.txt';
+        $filePath = 'car_database.txt';
         $carLine = implode(" ", $carDetails) . "\n";
         $fileHandle = fopen($filePath, "a");
         fwrite($fileHandle, $carLine);
