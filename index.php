@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php     include_once("app/db.php");
+          $db = new DatabaseInteractions;
+          $db->dbInit();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
