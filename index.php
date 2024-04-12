@@ -15,7 +15,7 @@
     <h2><a href="car.php">Kocsik</a></h2>
     <?php if(empty($_SESSION['user'])): ?>
           <h2> Bejelentkezés </h2>
-           <form name="register_form" action="app/eventhandler.php" method="POST">
+           <form name="register_form" action="app/datacontroller.php" method="POST">
                <p>Felhasználónév</p>
                    <input type="text" name="username" placeholder="Felhasználónév" required/>
                <p>Jelszó</p>
@@ -25,7 +25,7 @@
            </form>
             <br><br>
             <h2> Regisztráció </h2>
-            <form name="register_form" action="app/eventhandler.php" method="POST">
+            <form name="register_form" action="app/datacontroller.php" method="POST">
                 <p>Felhasználónév</p>
                     <input type="text" name="username" placeholder="Felhasználónév" required/>
                 <p>Jelszó</p>

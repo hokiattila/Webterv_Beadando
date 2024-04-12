@@ -1,21 +1,45 @@
 <?php
 include_once('db.php');
-session_start();
 
-$db = new DatabaseInteractions;
+
+class DataController {
+    private DatabaseInteractions $db;
+    private int $pageLimit;
+
+    public function __construct() {
+        $this->db = new DatabaseInteractions;
+        $this->pageLimit = 5;
+    }
+    public function carData($offset) : array {
+        if($offset < 0) $offset = 0;
+        return $this->db->fetchCarData($offset, $this->pageLimit);
+    }
+
+    public function pageCount(): int {
+       return  ceil($this->db->getCarRowCount() / $this->pageLimit);
+    }
+
+    public function setLimit($newlimit) : void {
+        if($newlimit >= 0) $this->pageLimit = $newlimit;
+    }
+
+    public function getLimit() : int {
+        return $this->pageLimit;
+    }
+
+
+
+}
+
+
+$controller = new DataController;
 
 if(isset($_POST['marka_gomb'])) {
-    $marka = $_POST['marka'];
-    $_SESSION['marka_kereses'] = $db->fetchCarsByBrand($marka);
-    if(empty($_SESSION['marka_kereses'])) $_SESSION['marka_kereses'] = 0;
-    header("Location: ../car.php");
+
 }
 
 if(isset($_POST['uj_gomb'])) {
     $record = array($_POST['marka'],$_POST['modell'],$_POST['meghajtas'],(int) $_POST['loero']);
-    $db->insertCar($record);
-    global $CARS;
-    print_r($CARS);
     header("Location: ../car.php");
 }
 

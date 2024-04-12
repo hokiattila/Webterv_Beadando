@@ -65,6 +65,7 @@ class DatabaseInteractions {
 	                    car_VIN VARCHAR(50) NOT NULL,
 	                    start_time DATETIME NOT NULL, 
 	                    end_time DATETIME NOT NULL,
+                        approved ENUM('igen', 'nem'),
 	                    FOREIGN KEY(username) REFERENCES users(username) ON DELETE CASCADE,
 	                    FOREIGN KEY(car_VIN) REFERENCES cars(VIN) ON DELETE CASCADE
                 )"
@@ -86,14 +87,25 @@ class DatabaseInteractions {
             echo "Connection failed: " . $e->getMessage();
         }
     }
-    public function fetchCarData() : array {
-        $carsArray = [];
-
-        return $carsArray;
+    public function fetchCarData($offset, $limit) : array {
+        $pdo = $this->dbConnection();
+        $sql = "SELECT * FROM cars LIMIT :limit OFFSET :offset";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function validateDatabaseName($databaseName): bool {
         return preg_match('/^[a-zA-Z0-9_]+$/', $databaseName);
+    }
+
+    function getCarRowCount() : int{
+        $pdo = $this->dbConnection();
+        $stmt = $pdo->query("SELECT COUNT(*) FROM cars");
+        $rowCount = $stmt->fetchColumn();
+        return (int) $rowCount;
     }
 
 

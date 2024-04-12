@@ -1,1 +1,1 @@
-alert("Hello World!")
+console.log("JS Library included successfully")

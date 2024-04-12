@@ -1,25 +1,50 @@
 <?php
     session_start();
-    include_once("app/db.php");
-    $db = new DatabaseInteractions;
-    $all = $db->fetchCarData();
-    $all_brands = $db->getDistinctBrands();
-?>
+    include_once("app/datacontroller.php");
+    $controller = new DataController;
+    $pages = $controller->pageCount();
+    if(isset($_GET['page-nr']) && $_GET['page-nr'] > 0 && $_GET['page-nr'] <= $pages){
+        $current = (int) $_GET['page-nr'];
+    $page = $current - 1;
+    $start = $page * $controller->getLimit();
+    } else {
+        $current = 1;
+        $start = 0;
+        $page = 0;
+    }
+    $all = $controller->carData($start);
+
+    ?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/car.css">
     <title>Autóink</title>
 </head>
 <body>
     <h1>Jelenlegi eladó autóink:</h1>
     <?php
     foreach ($all as $car) {
-        echo "Márka: " . $car[0] . ", Modell: " . $car[1] . ", Üzemanyag: " . $car[2] . ", Lóerő: " . $car[3] . "HP<br>";
+        echo "Márka: " . $car["brand"] . ", Modell: " . $car["modell"] . ", Üzemanyag: " . $car["fuel_type"] . ", Lóerő: " . $car["power"] . "HP <br>";
     }
     ?>
+    <div class="page-info">
+        Showing <?php echo $current; ?> of <?php echo $pages ?>
+    </div>
+    <div class="pagination">
+        <a href="?page-nr=1">First</a>
+        <a href="?page-nr=<?php echo ($current - 1 > 0) ? $current - 1 : 1; ?>">Previous</a>
+        <div class="page-numbers">
+            <?php for($i = 1; $i<=$pages; $i++): ?>
+                <a href="?page-nr=<?php echo $i;?>"><?php echo $i; ?></a>
+            <?php endfor;?>
+        </div>
+        <a href="?page-nr=<?php echo ($current + 1) <= $pages ? $current + 1 : $pages;?>">Next</a>
+        <a href="?page-nr=<?php echo $pages ?>">Last</a>
+    </div>
     <br>
-    <form method="POST" action="app/eventhandler.php">
+    <form method="POST" action="app/datacontroller.php">
         <h2>Keresés</h2>
         <p>Márka:</p>
     <select name="marka">
@@ -36,13 +61,13 @@
         if(isset($_SESSION['marka_kereses']) && $_SESSION['marka_kereses'] == 0) echo "Nincs találat!";
         if(isset($_SESSION['marka_kereses']) && $_SESSION['marka_kereses'] != 0) {
             foreach ($_SESSION['marka_kereses'] as $record) {
-                echo "Márka: " . $record[0] . ", Modell: " . $record[1] . ", Üzemanyag: " . $record[2] . ", Lóerő: " . $record[3] . "HP <br>";
+                echo "Márka: " . $record["brand"] . ", Modell: " . $record["modell"] . ", Üzemanyag: " . $record["fuel_type"] . ", Lóerő: " . $record["power"] . "HP <br>";
             }
         }
     ?>
     <br>
     <h2>Használt autó regisztrálása:</h2>
-    <form method="POST" action="app/eventhandler.php">
+    <form method="POST" action="app/datacontroller.php">
         <input type="text" name="marka" placeholder="Autó márka" minlength="3" max="12" required/>
         <input type="text" name="modell" placeholder="Modell" min="2" maxlength="20" required/>
         <select name="meghajtas">
