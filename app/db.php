@@ -1,10 +1,10 @@
 <?php
 class DatabaseInteractions {
-    private string $servername = "mysql://root:ilFMYGqpWoJJvyuvmyowDeZJvbaLBRZp@roundhouse.proxy.rlwy.net:45698/railway";
+    private string $servername = "roundhouse.proxy.rlwy.net";
     private string $username = "root";
     private string $password = "ilFMYGqpWoJJvyuvmyowDeZJvbaLBRZp";
     private int $port = 45698;
-    private string $database = "web1_project";
+    private string $database = "railway";
 
     function dbConnection($mode = "DB") : PDO {
         return $mode != "NODB"
