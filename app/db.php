@@ -1,6 +1,6 @@
 <?php
 class DatabaseInteractions {
-    private string $servername = "roundhouse.proxy.rlwy.net:45698";
+    private string $servername = "roundhouse.proxy.rlwy.net";
     private string $username = "root";
     private string $password = "ilFMYGqpWoJJvyuvmyowDeZJvbaLBRZp";
     private int $port = 45698;
