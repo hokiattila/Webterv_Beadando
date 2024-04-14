@@ -3,7 +3,7 @@ class DatabaseInteractions {
     private string $servername = "roundhouse.proxy.rlwy.net:45698";
     private string $username = "root";
     private string $password = "ilFMYGqpWoJJvyuvmyowDeZJvbaLBRZp";
-    private int $port = 3306;
+    private int $port = 45698;
     private string $database = "web1_project";
 
     function dbConnection($mode = "DB") : PDO {
