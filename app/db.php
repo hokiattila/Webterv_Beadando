@@ -1,8 +1,8 @@
 <?php
 class DatabaseInteractions {
-    private string $servername = "localhost";
+    private string $servername = "roundhouse.proxy.rlwy.net:45698";
     private string $username = "root";
-    private string $password = "";
+    private string $password = "ilFMYGqpWoJJvyuvmyowDeZJvbaLBRZp";
     private int $port = 3306;
     private string $database = "web1_project";
 
@@ -101,7 +101,7 @@ class DatabaseInteractions {
         return preg_match('/^[a-zA-Z0-9_]+$/', $databaseName);
     }
 
-    function getCarRowCount() : int{
+    function getCarRowCount() : int {
         $pdo = $this->dbConnection();
         $stmt = $pdo->query("SELECT COUNT(*) FROM cars");
         $rowCount = $stmt->fetchColumn();
@@ -109,39 +109,21 @@ class DatabaseInteractions {
     }
 
 
-    public function fetchCarsByBrand(string $brand) : array|false {
-        $CARS = $this->fetchCarData();
-        $foundCars = [];
-        foreach ($CARS as $car) {
-            if ($car[0] === $brand) {
-                $foundCars[] = $car;
-            }
-        }
-        return !empty($foundCars) ? $foundCars : false;
+    public function fetchCarsByBrand(string $brand) : array|bool {
+            return false;
     }
 
-    public function fetchBrandNames() : array|false {
-        $brandNames = [];
-        $CARS = $this->fetchCarData();
-        foreach ($CARS as $car) {
-            $brandNames[] = $car[0];
-        }
-        return !empty($brandNames) ? $brandNames : false;
+    public function fetchBrandNames() : array|bool {
+        return  false;
     }
 
-    public function getDistinctBrands() : array|false {
-        $brands = $this->fetchBrandNames();
-        if(empty($brands)) return false;
-        return array_combine($brands,$brands);
+    public function getDistinctBrands() : array|bool {
+        return false;
     }
 
 
     public function insertCar(array $carDetails) : void {
-        $filePath = 'car_database.txt';
-        $carLine = implode(" ", $carDetails) . "\n";
-        $fileHandle = fopen($filePath, "a");
-        fwrite($fileHandle, $carLine);
-        fclose($fileHandle);
+
     }
 
 

@@ -27,8 +27,6 @@ class DataController {
         return $this->pageLimit;
     }
 
-
-
 }
 
 
