@@ -1,7 +1,7 @@
 <?php
-    session_start();
     include_once("app/datacontroller.php");
     $controller = new DataController;
+    $token = $controller->generateToken();
     $pages = $controller->pageCount();
     if(isset($_GET['page-nr']) && $_GET['page-nr'] > 0 && $_GET['page-nr'] <= $pages){
         $current = (int) $_GET['page-nr'];
@@ -13,7 +13,6 @@
         $page = 0;
     }
     $all = $controller->carData($start);
-
     ?>
 <!DOCTYPE html>
 <html lang="hu">

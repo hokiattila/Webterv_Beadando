@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <?php     include_once("app/db.php");
+          include_once("app/datacontroller.php");
+          $controller = new DataController;
+          $token = $controller->generateToken();
           $db = new DatabaseInteractions;
           $db->dbInit();
 ?>
@@ -12,14 +15,16 @@
 </head>
 <body>
     <h1>Szia! Vegyél kocsit!</h1>
+    <?php if(isset($_SESSION['username'])) echo "Hi".$_SESSION['username']; ?>
     <h2><a href="car.php">Kocsik</a></h2>
-    <?php if(empty($_SESSION['user'])): ?>
+    <?php if(empty($_SESSION['username']) || empty($_SESSION['role'])): ?>
           <h2> Bejelentkezés </h2>
-           <form name="register_form" action="app/datacontroller.php" method="POST">
+           <form name="login_form" action="app/datacontroller.php" method="POST">
+                   <input type="hidden" name="token" value="<?= $token ?>"
                <p>Felhasználónév</p>
-                   <input type="text" name="username" placeholder="Felhasználónév" required/>
+                   <input type="text" name="username" placeholder="Felhasználónév"/>
                <p>Jelszó</p>
-                   <input type="password" name="password" placeholder="Jelszó" required/>
+                   <input type="password" name="password" placeholder="Jelszó"/>
                <br>
                <input type="submit" name="login-btn" value="Bejelentkezés" style="margin-top: 15px"/>
            </form>

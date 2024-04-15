@@ -108,6 +108,15 @@ class DatabaseInteractions {
         return (int) $rowCount;
     }
 
+    function fetchUserData($username) : array {
+        $pdo = $this->dbConnection();
+        $sql = "SELECT username, hashed_psw, role FROM users WHERE username = :username ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     public function fetchCarsByBrand(string $brand) : array|bool {
             return false;

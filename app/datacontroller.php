@@ -1,6 +1,6 @@
 <?php
 include_once('db.php');
-
+session_start();
 
 class DataController {
     private DatabaseInteractions $db;
@@ -27,27 +27,44 @@ class DataController {
         return $this->pageLimit;
     }
 
+
+    public function generateToken() : string {
+        try {
+            $token = bin2hex(random_bytes(32));
+            $_SESSION['token'] = $token;
+            return $token;
+        } catch (Exception $e) {
+            error_log('Hiba a token generálásakor: ' . $e->getMessage());
+            return 'Hiba történt a token generálásakor.';
+        } catch (Error $e) {
+            error_log('Rendszerhiba a token generálásakor: ' . $e->getMessage());
+            return 'Rendszerhiba történt a token generálásakor.';
+        }
+    }
+
+    public function loginController($username_input, $password_input, $token) : void {
+        if($token != $_SESSION['token']) header("Location: ../index.php?error=tokenmissmatch");
+        else if(empty($username_input)) header("Location: ../index.php?error=empty_username");
+        else if(empty($password_input)) header("Location: ../index.php?error=empty_password");
+        else {
+            $res = $this->db->fetchUserData($username_input, $password_input);
+            if($res[0]['username'] == $username_input && password_verify($password_input, $res[0]['hashed_psw'])) {
+                $_SESSION['username'] = $res[0]['username'];
+                $_SESSION['role'] = $res[0]['role'];
+                header("Location: ../index.php");
+            } else {
+                header("Location: ../index.php?error=invalid_credentials");
+            }
+        }
+    }
+
 }
+
 
 
 $controller = new DataController;
 
-if(isset($_POST['marka_gomb'])) {
-
+if(isset($_POST['login-btn'])) {
+    $controller->loginController($_POST['username'], $_POST['password'], $_POST['token']);
 }
 
-if(isset($_POST['uj_gomb'])) {
-    $record = array($_POST['marka'],$_POST['modell'],$_POST['meghajtas'],(int) $_POST['loero']);
-    header("Location: ../car.php");
-}
-
-if(isset($_POST['register-btn'])) {
-    $password_match = (bool) $_POST['password'] === $_POST['password_conf'];
-    $all_filled = !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['password_conf']);
-    if(!$password_match) header("Location ../index.php?error=password_miss_match");
-    if(!$all_filled) header("Location ../index.php?error=missing_param");
-    $uname = $_POST['username'];
-    $password = $_POST['password'];
-    $password_conf = $_POST['password_conf'];
-    echo $uname.' '.$password.' '.$password_conf;
-}
