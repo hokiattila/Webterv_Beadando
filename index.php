@@ -15,7 +15,13 @@
 </head>
 <body>
     <h1>Szia! Vegyél kocsit!</h1>
-    <?php if(isset($_SESSION['username'])) echo "Hi".$_SESSION['username']; ?>
+    <?php if(isset($_SESSION['username']) && isset($_SESSION['role'])):?>
+        <p>Bejelentkezve mint: <i style="color: white; background-color: black"><b><?=$_SESSION['username']?></b></i>,  jogkör: <i style="color: white; background-color: black"><b><?=$_SESSION['role']?></b></i></p>
+        <form method="post" action="app/datacontroller.php">
+        <input type="submit" name="logout-btn" value="Kijelentkezés">
+            <input type="hidden" name="token" value="<?= $token ?>"
+        </form>
+    <?php endif; ?>
     <h2><a href="car.php">Kocsik</a></h2>
     <?php if(empty($_SESSION['username']) || empty($_SESSION['role'])): ?>
           <h2> Bejelentkezés </h2>

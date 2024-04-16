@@ -58,9 +58,14 @@ class DataController {
         }
     }
 
+    public function logoutController($token) : void {
+        if($token != $_SESSION['token']) header("Location: ../index.php?error=tokenmissmatch");
+        $_SESSION = array();
+        session_destroy();
+        header("Location: ../index.php");
+    }
+
 }
-
-
 
 $controller = new DataController;
 
@@ -68,3 +73,6 @@ if(isset($_POST['login-btn'])) {
     $controller->loginController($_POST['username'], $_POST['password'], $_POST['token']);
 }
 
+if(isset($_POST['logout-btn'])) {
+    $controller->logoutController($_POST['token']);
+}
