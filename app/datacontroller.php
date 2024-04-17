@@ -70,6 +70,8 @@ class DataController {
         else if(empty($username_input) || empty($password_input) || empty($password_conf) || empty($email) || empty($lastname) || empty($firstname) || empty($szuldatum) || empty($nem) || empty($telefonszam)) header("Location: ../index.php?error=missing_credentials");
         else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) header("Location: ../index.php?error=invalid_email");
         else if($password_input != $password_conf) header("Location: ../index.php?error=psw_missmatch");
+        else if((!$this->checkString($firstname, "ONLYALPHABET")) || (!$this->checkString($lastname, "ONLYALPHABET")))  header("Location: ../index.php?error=invalid_credentials");
+        else if((!$this->checkString($telefonszam, "ONLYNUM")))  header("Location: ../index.php?error=invalid_phone");
         else if(!$this->validateCredentials($username_input)) header("Location: ../index.php?error=forbidden_value");
         else {
             $hashed_psw = password_hash($password_input, PASSWORD_DEFAULT);
@@ -88,6 +90,13 @@ class DataController {
         return true;
     }
 
+    private function checkString($str, $mode) : bool {
+        return match ($mode) {
+            'ONLYALPHABET' => !preg_match('/\d/', $str),
+            'ONLYNUM' => !preg_match('/[a-zA-Z]/', $str),
+            default => throw new InvalidArgumentException("Invalid mode specified"),
+        };
+    }
 
 }
 
