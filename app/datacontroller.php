@@ -67,8 +67,7 @@ class DataController {
 
     public function registerController($token, $username_input, $password_input, $password_conf, $email, $lastname, $firstname, $szuldatum, $nem, $telefonszam) : void {
         if($token != $_SESSION['token']) header("Location: ../index.php?error=tokenmissmatch");
-        else if(empty($username_input)) header("Location: ../index.php?error=empty_username");
-        else if(empty($password_input)) header("Location: ../index.php?error=empty_password");
+        else if(empty($username_input) || empty($password_input) || empty($password_conf) || empty($email) || empty($lastname) || empty($firstname) || empty($szuldatum) || empty($nem) || empty($telefonszam)) header("Location: ../index.php?error=missing_credentials");
         else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) header("Location: ../index.php?error=invalid_email");
         else if($password_input != $password_conf) header("Location: ../index.php?error=psw_missmatch");
         else if(!$this->validateCredentials($username_input)) header("Location: ../index.php?error=forbidden_value");
