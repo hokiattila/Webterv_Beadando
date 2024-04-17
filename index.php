@@ -37,16 +37,37 @@
             <br><br>
             <h2> Regisztráció </h2>
             <form name="register_form" action="app/datacontroller.php" method="POST">
+                <input type="hidden" name="token" value="<?= $token ?>"
                 <p>Felhasználónév</p>
-                    <input type="text" name="username" placeholder="Felhasználónév" required/>
+                    <input type="text" name="username" placeholder="Felhasználónév" />
                 <p>Jelszó</p>
-                    <input type="password" name="password" placeholder="Jelszó" required/>
+                    <input type="password" name="password" placeholder="Jelszó" />
                 <p>Jelszó megerősítése</p>
-                    <input type="password" name="password_conf" placeholder="Jelszó Megerősítés" required/>
+                    <input type="password" name="password_conf" placeholder="Jelszó Megerősítés" />
+                <br>
+                <p>Email</p>
+                    <input type="email" name="email" placeholder="Email cím">
+                <br>
+                <p>Vezetéknév</p>
+                    <input type="text" name="lastname" placeholder="Vezetéknév" >
+                <br>
+                <p>Keresztnév</p>
+                    <input type="text" name="firstname" placeholder="Keresztnév" >
+                <br>
+                <p>Születési dátum</p>
+                    <input type="date" name="szuldatum" placeholder="Születési dátum" >
+                <br>
+                <p>Nem</p>
+                    <select name="nem">
+                        <option>Férfi</option>
+                        <option>Nő</option>
+                    </select>
+                <br>
+                <p>Telefonszám:</p>
+                    <input type="text" name="telefonszam" placeholder="Telefonszám" pattern="^[0-9]*$">
                 <br>
                 <input type="submit" name="register-btn" value="Regisztráció" style="margin-top: 15px"/>
             </form>
-            <br><br>
     <?php endif;?>
 </body>
 </html>

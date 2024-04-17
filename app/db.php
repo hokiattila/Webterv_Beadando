@@ -118,6 +118,10 @@ class DatabaseInteractions {
     }
 
 
+    function insertUserData() : void {
+
+    }
+
     public function fetchCarsByBrand(string $brand) : array|bool {
             return false;
     }

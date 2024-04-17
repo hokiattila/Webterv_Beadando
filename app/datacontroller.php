@@ -65,6 +65,15 @@ class DataController {
         header("Location: ../index.php");
     }
 
+    public function registerController($username_input, $password_input, $password_conf, $token) : void {
+        if($token != $_SESSION['token']) header("Location: ../index.php?error=tokenmissmatch");
+        else if(empty($username_input)) header("Location: ../index.php?error=empty_username");
+        else if(empty($password_input)) header("Location: ../index.php?error=empty_password");
+        else if($password_input != $password_conf) header("Location: ../index.php?error=psw_missmatch");
+
+
+    }
+
 }
 
 $controller = new DataController;
@@ -75,4 +84,7 @@ if(isset($_POST['login-btn'])) {
 
 if(isset($_POST['logout-btn'])) {
     $controller->logoutController($_POST['token']);
+}
+
+if(isset($_POST['register-btn'])) {
 }
