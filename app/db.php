@@ -118,8 +118,10 @@ class DatabaseInteractions {
     }
 
 
-    function insertUserData() : void {
-
+    public function insertUserData($username, $hashed_psw, $email, $lastname, $firstname, $szuldatum, $nem, $telefonszam) : void {
+        $conn = $this->dbConnection();
+        $stmt  = $conn->prepare("INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $stmt->execute([$username, $hashed_psw,"user", $firstname,$lastname, $szuldatum, $nem, date('Y-m-d'), $telefonszam, $email]);
     }
 
     public function fetchCarsByBrand(string $brand) : array|bool {

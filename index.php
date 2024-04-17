@@ -46,7 +46,7 @@
                     <input type="password" name="password_conf" placeholder="Jelszó Megerősítés" />
                 <br>
                 <p>Email</p>
-                    <input type="email" name="email" placeholder="Email cím">
+                    <input type="text" name="email" placeholder="Email cím">
                 <br>
                 <p>Vezetéknév</p>
                     <input type="text" name="lastname" placeholder="Vezetéknév" >

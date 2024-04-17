@@ -65,14 +65,30 @@ class DataController {
         header("Location: ../index.php");
     }
 
-    public function registerController($username_input, $password_input, $password_conf, $token) : void {
+    public function registerController($token, $username_input, $password_input, $password_conf, $email, $lastname, $firstname, $szuldatum, $nem, $telefonszam) : void {
         if($token != $_SESSION['token']) header("Location: ../index.php?error=tokenmissmatch");
         else if(empty($username_input)) header("Location: ../index.php?error=empty_username");
         else if(empty($password_input)) header("Location: ../index.php?error=empty_password");
+        else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) header("Location: ../index.php?error=invalid_email");
         else if($password_input != $password_conf) header("Location: ../index.php?error=psw_missmatch");
-
-
+        else if(!$this->validateCredentials($username_input)) header("Location: ../index.php?error=forbidden_value");
+        else {
+            $hashed_psw = password_hash($password_input, PASSWORD_DEFAULT);
+            $this->db->insertUserData($username_input, $hashed_psw, $email, $lastname, $firstname, $szuldatum, $nem, $telefonszam );
+            $this->loginController($username_input, $password_input, $token);
+        }
     }
+
+    private function validateCredentials($input) : bool {
+        $dangerousCharacters = ["'", "\"", ";", "--", "#"];
+        foreach ($dangerousCharacters as $char) {
+            if (str_contains($input, $char)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 }
 
@@ -87,4 +103,5 @@ if(isset($_POST['logout-btn'])) {
 }
 
 if(isset($_POST['register-btn'])) {
+    $controller->registerController($_POST['token'], $_POST['username'], $_POST['password'], $_POST['password_conf'], $_POST['email'], $_POST['lastname'], $_POST['firstname'], $_POST['szuldatum'], $_POST['nem'], $_POST['telefonszam']);
 }
