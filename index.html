@@ -1,0 +1,199 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Beállítások telefonos megjelenésekhez -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+
+    </style>
+</head>
+<body class="">
+
+<header>
+    <div class="container"></div>
+</header>
+<!-- Loading gif eltüntetése ha betölt az oldal -->
+<!-- A betöltő div -->
+<div id="betolto">
+    <img src="/img/loading.gif" alt="Betöltő animáció">
+</div>
+<!-- Navigációs menü -->
+<div class="navbar">
+    <!-- Logó -->
+    <div class="logo">
+        <img src="/img/logo.png" alt="Logó">
+    </div>
+
+    <!-- Menüpontok -->
+    <div class="menu">
+        <a href="#">Főoldal</a>
+        <a href="#">Galéria</a>
+        <a href="#">Kapcsolat</a>
+        <!-- mindenkepp dinamikus btn legyen -->
+        <a href="#">Bejelentkezés</a>
+    </div>
+</div>
+
+<div class="gallery">
+
+
+    <!-- Lapozható galéria -->
+    <div class="slideshow-container">
+        <div class="mySlides fade active">
+            <img src="/img/carlogo2.png" style="width:100%">
+        </div>
+        <!--
+        <div class="mySlides fade">
+            <img src="/img/carpic2.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="/img/auto3.jpeg" style="width:100%">
+        </div>
+        -->
+        <div class="centered">
+            <h1 class="title"></h1>
+            <h2 class="subtitle">Csak rád vár, hogy elvidd!<br><font color="gray" size="2">(miután kifizetted)</font></h2>
+        </div>
+        <div class="imageonimage">
+            <img src="/img/logo.png" style="width:100%">
+            </div>
+        </div>
+        <!-- Lapozó gombok -->
+        <!--
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        -->
+    </div>
+</div>
+<!-- Kategória kiválasztás a kereséshez -->
+<div>
+<div class="centercontainer" >
+    <div class="dropdown">
+        <button onclick="ClickedOnButton()" class="dropbtn">Márka</button>
+        <div id="dropdownMarka" class="dropdown-content">
+            <input type="text" placeholder="Search.." id="inputMarka" onkeyup="filterFunction()">
+            <a href="#mercedes-benz">Mercedes-Benz</a>
+            <a href="#audi">Audi</a>
+            <a href="#ford">Ford</a>
+            <a href="#bmw">BMW</a>
+            <a href="#peugeot">Peugeot</a>
+            <a href="#suzuki">Suzuki</a>
+            <a href="#toyota">Toyota</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button onclick="ClickedOnButton()" class="dropbtn">Modell</button>
+        <div id="dropdownTipus" class="dropdown-content">
+            <input type="text" placeholder="Search.." id="inputTipus" onkeyup="filterFunction()">
+            <a href="#mercedes-benz">Mercedes-Benz</a>
+            <a href="#audi">Audi</a>
+            <a href="#ford">Ford</a>
+            <a href="#bmw">BMW</a>
+            <a href="#peugeot">Peugeot</a>
+            <a href="#suzuki">Suzuki</a>
+            <a href="#toyota">Toyota</a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="centercontainer" >
+<ul class="list">
+    <!-- listaelemeket php-val megjeleníteni dinamikusan a dobott találatok alapján -->
+    <li class="list-item">
+        <img src="https://via.placeholder.com/150" alt="Kép 1">
+        <div class="list-item-content">
+            <h3>Autó</h3>
+            <p>Rövid leírás 1.</p>
+        </div>
+    </li>
+    <li class="list-item">
+        <img src="https://via.placeholder.com/150" alt="Kép 2">
+        <div class="list-item-content">
+            <h3>Autó</h3>
+            <p>Rövid leírás 2.</p>
+        </div>
+    </li>
+    <li class="list-item">
+        <img src="https://via.placeholder.com/150" alt="Kép 3">
+        <div class="list-item-content">
+            <h3>Autó</h3>
+            <p>Rövid leírás 3.</p>
+        </div>
+    </li>
+</ul>
+</div>
+<!-- Ha lesz elég content ez majd törlendő! -->
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<script>
+    window.addEventListener('load', function() {
+        var betoltoDiv = document.getElementById('betolto');
+        var tartalomDiv = document.getElementById('tartalom');
+        betoltoDiv.style.display = 'none'; // A betöltő div elrejtése
+        tartalomDiv.style.display = 'block'; // A tartalom megjelenítése
+    });
+</script>
+<!-- Gallériához javascript -->
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Következő/Előző dia megjelenítése
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Aktuális dia megjelenítése
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "block";
+    }
+</script>
+<!-- Dropdown menuhoz javascript -->
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function ClickedOnButton() {
+        document.getElementById("dropdownMarka").classList.toggle("show");
+    }
+
+    function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("inputMarka");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("dropdownMarka");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+</script>
+<footer>
+    <p>&copy; 2024 Ott a kocsid! kft. Minden jog fenntartva.</p>
+    <p class="contact">Kapcsolat: support@ottakocsid.hu | Telefon: +36 1 234 5678</p>
+</footer>
+</body>
+</html>
