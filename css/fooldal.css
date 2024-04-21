@@ -1,0 +1,38 @@
+/* 3 box design */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 30px;
+}
+
+.box {
+    width: 25%;
+    height: 25%;
+    background-image: linear-gradient(white, #eee);
+    /*border: 2px solid #ccc;*/
+    margin: 25px 20px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px; /* Kerekített sarok */
+
+}
+.box-tartalom {
+    padding: 10px;
+}
+.box-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.box-text {
+    font-size: 16px;
+    color: #333;
+}
+
+a {
+    text-decoration: none; /* Keresztülhúzás eltávolítása */
+    color: inherit; /* Az örökölt szövegszín használata */
+    cursor: pointer; /* Mutató ikon megjelenítése */
+}

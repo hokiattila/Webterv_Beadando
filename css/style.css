@@ -55,10 +55,10 @@
 
 
 body {
-    font-family: FontAwesome ;
+    font-family: 'Rajdhani', sans-serif; ;
     margin: 0;
     padding: 0;
-    background-color: #CCC;
+    background-image: linear-gradient(#ccc, #FFF);
 }
 
 .gallery {
@@ -191,15 +191,53 @@ body {
     background-color: #555; /* Háttérszín hover állapotban */
 }
 
+/* Kezdő és vég ár input container */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 30px;
+}
+
+.input-container input {
+    width: 150px;
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.search-button {
+    margin-left: auto;
+    margin-top: auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 /* Dropdown menu */
 .dropbtn {
-    background-color: #874f41;
+    background-color: #6CAFC1;
     color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 /* Dropdown button on hover & focus */
@@ -233,7 +271,7 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #874f41;
+    background-color: #CCCCCC;
     min-width: 230px;
     border: 1px solid #ddd;
     z-index: 1;
@@ -258,7 +296,7 @@ body {
 .centercontainer {
     margin: auto;
     width: 80%;
-    border: 3px solid gray;
+
     padding: 20px;
 }
 
@@ -290,7 +328,7 @@ footer {
 .list-item {
     display: flex; /* Flexbox elrendezés */
     margin-bottom: 20px; /* Margó a lista elemek között */
-    background: #874f4122;
+    /*background: #874f4122;*/
     padding: 20px;
 }
 
@@ -314,6 +352,8 @@ footer {
     margin-top: 5px; /* Margó a leírás felett */
 
 }
+
+
 
 
 

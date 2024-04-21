@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fooldal.css">
     <!-- Beállítások telefonos megjelenésekhez -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +17,6 @@
 <body class="">
 
 <header>
-    <div class="container"></div>
 </header>
 <!-- Loading gif eltüntetése ha betölt az oldal -->
 <!-- A betöltő div -->
@@ -27,7 +27,7 @@
 <div class="navbar">
     <!-- Logó -->
     <div class="logo">
-        <a href="#"><img src="img/logo.png" alt="Logó"></a>
+        <a href="index.html"><img src="img/logo.png" alt="Logó"></a>
     </div>
 
     <!-- Menüpontok -->
@@ -53,6 +53,27 @@
         <button onclick="scrollToBottom()">Ismerd meg kínálatunkat!</button>
     </div>
 </div>
+<!-- 3 box -->
+<div class="container">
+    <div class="box">
+        <div class="box-tartalom">
+            <div class="box-icon">⚙️</div>
+            <div class="box-text">Csapj le az új autókkal érkező akcióra és garanciára! Mi garantáljuk neked a minőséget!</div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-tartalom">
+            <div class="box-icon">📁</div>
+            <div class="box-text">Jelentkezz be az oldalunkon, és mentsd el a kedvenc autóidat, hogy később megtaláld őket!</div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-tartalom">
+            <div class="box-icon">🔍</div>
+            <div class="box-text">Állítsd be a számodra fontos preferenciákat, és találd meg a legjobban tetsző autót!</div>
+        </div>
+    </div>
+</div>
     <!-- Lapozható galéria -->
 
         <!--
@@ -76,6 +97,8 @@
 <!-- Kategória kiválasztás a kereséshez -->
 <div>
 <div class="centercontainer" >
+    <form>
+        <div class="input-container">
     <div class="dropdown">
         <button onclick="ClickedOnButton()" class="dropbtn">Márka</button>
         <div id="dropdownMarka" class="dropdown-content">
@@ -102,32 +125,49 @@
             <a href="#toyota">Toyota</a>
         </div>
     </div>
+
+            <input type="text" placeholder="Kezdő ár">
+            <input type="text" placeholder="Vég ár">
+        </div>
+        <div align="right">
+        <button class="search-button" type="submit">Szűrés</button></div>
+    </form>
 </div>
 </div>
 <div class="centercontainer" >
 <ul class="list">
     <!-- listaelemeket php-val megjeleníteni dinamikusan a dobott találatok alapján -->
+    <a href="car.html">
     <li class="list-item">
         <img src="img/cars/cla/cla2.webp" alt="Kép 1">
         <div class="list-item-content">
             <h3>Autó</h3>
             <p>Rövid leírás 1.</p>
+            <hr>
+            <p>Ár: 13,000,000 Ft</p>
         </div>
     </li>
+    </a>
+    <a href="car.html">
     <li class="list-item">
         <img src="img/cars/cla/cla3.jpeg" alt="Kép 2">
         <div class="list-item-content">
             <h3>Autó</h3>
             <p>Rövid leírás 2.</p>
+            <hr>
+            <p>Ár: 13,000,000 Ft</p>
         </div>
-    </li>
+    </li></a>
+    <a href="car.html">
     <li class="list-item">
         <img src="img/cars/cla/cla4.webp" alt="Kép 3">
         <div class="list-item-content">
             <h3>Autó</h3>
             <p>Rövid leírás 3.</p>
+            <hr>
+            <p>Ár: 13,000,000 Ft</p>
         </div>
-    </li>
+    </li></a>
 </ul>
 </div>
 <!-- Ha lesz elég content ez majd törlendő! -->
