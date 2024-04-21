@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- Beállítások telefonos megjelenésekhez -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,13 +21,13 @@
 <!-- Loading gif eltüntetése ha betölt az oldal -->
 <!-- A betöltő div -->
 <div id="betolto">
-    <img src="/img/loading.gif" alt="Betöltő animáció">
+    <img src="img/loading.gif" alt="Betöltő animáció">
 </div>
 <!-- Navigációs menü -->
 <div class="navbar">
     <!-- Logó -->
     <div class="logo">
-        <img src="/img/logo.png" alt="Logó">
+        <a href="#"><img src="img/logo.png" alt="Logó"></a>
     </div>
 
     <!-- Menüpontok -->
@@ -39,32 +39,33 @@
         <a href="#">Bejelentkezés</a>
     </div>
 </div>
+<div class="mainimage-container">
+    <img src="img/carstore.jpg" >
 
-<div class="gallery">
-
-
-    <!-- Lapozható galéria -->
-    <div class="slideshow-container">
-        <div class="mySlides fade active">
-            <img src="/img/carlogo2.png" style="width:100%">
-        </div>
-        <!--
-        <div class="mySlides fade">
-            <img src="/img/carpic2.jpg" style="width:100%">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="/img/auto3.jpeg" style="width:100%">
-        </div>
-        -->
-        <div class="centered">
-            <h1 class="title"></h1>
-            <h2 class="subtitle">Csak rád vár, hogy elvidd!<br><font color="gray" size="2">(miután kifizetted)</font></h2>
-        </div>
         <div class="imageonimage">
-            <img src="/img/logo.png" style="width:100%">
+            <div class="hatterkocka">
+            <h1>Üdvözlünk az oldalunkon!</h1>
+            <p>Találd meg a számodra megfelelő autót még ma!</p>
             </div>
         </div>
+
+    <div class="button-container">
+        <button onclick="scrollToBottom()">Ismerd meg kínálatunkat!</button>
+    </div>
+</div>
+    <!-- Lapozható galéria -->
+
+        <!--
+        <div class="mySlides fade">
+            <img src="img/carpic2.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="img/auto3.jpeg" style="width:100%">
+        </div>
+        -->
+
+
         <!-- Lapozó gombok -->
         <!--
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -107,21 +108,21 @@
 <ul class="list">
     <!-- listaelemeket php-val megjeleníteni dinamikusan a dobott találatok alapján -->
     <li class="list-item">
-        <img src="https://via.placeholder.com/150" alt="Kép 1">
+        <img src="img/cars/cla/cla2.webp" alt="Kép 1">
         <div class="list-item-content">
             <h3>Autó</h3>
             <p>Rövid leírás 1.</p>
         </div>
     </li>
     <li class="list-item">
-        <img src="https://via.placeholder.com/150" alt="Kép 2">
+        <img src="img/cars/cla/cla3.jpeg" alt="Kép 2">
         <div class="list-item-content">
             <h3>Autó</h3>
             <p>Rövid leírás 2.</p>
         </div>
     </li>
     <li class="list-item">
-        <img src="https://via.placeholder.com/150" alt="Kép 3">
+        <img src="img/cars/cla/cla4.webp" alt="Kép 3">
         <div class="list-item-content">
             <h3>Autó</h3>
             <p>Rövid leírás 3.</p>
@@ -190,6 +191,15 @@
         }
     }
 
+</script>
+<!-- Lefele görgetés gombra kattintva -->
+<script>
+    function scrollToBottom() {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
 </script>
 <footer>
     <p>&copy; 2024 Ott a kocsid! kft. Minden jog fenntartva.</p>

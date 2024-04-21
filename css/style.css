@@ -17,13 +17,48 @@
     max-width: 100%; /* Az img szélessége legfeljebb 100% */
 }
 
+.mainimage-container {
+    width: 100%; /* A tartalom szélessége legyen 100% */
+    overflow: hidden; /* Ha a kép túl nagy, akkor ne legyen overflow (túlcsordulás) */
+}
+
+.mainimage-container img {
+    width: 100%; /* A kép szélessége legyen 100% a szülőelem szélességéhez képest */
+    height: auto; /* Automatikus magasság beállítása a képarány megtartásához */
+    display: block; /* A képet blokkként kezeli, hogy ne legyenek felesleges részek */
+}
 /* Gallériához szükséges beállítások */
+.caption {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+}
+
+.caption h2, .caption p {
+    margin: 0;
+}
+
+.button-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
 
 body {
     font-family: FontAwesome ;
     margin: 0;
     padding: 0;
-    background-color: #90aead;
+    background-color: #CCC;
 }
 
 .gallery {
@@ -108,18 +143,24 @@ body {
 }
 .imageonimage {
     position: absolute;
-    top: 20%;
+    top: 50%;
     left: 25%;
     height: 30%;
     width: 30%;
     transform: translate(-50%, -50%);
+    color: white;
+    font-size: 25px;
 
+}
+.hatterkocka {
+    padding: 50px 50px 50px 50px;
+    background-color: #141628AA;
 }
 
 /* Menüsáv css */
 /* Menüsáv stílusai */
 .navbar {
-    background-color: #244855; /* Menüsáv háttérszíne */
+    background-color: #141628; /* Menüsáv háttérszíne */
     overflow: hidden;
     width: 100%;
     display: flex;
@@ -224,7 +265,7 @@ body {
 
 /* Footer stílusai */
 footer {
-    background-color: #244855; /* Háttérszín */
+    background-color: #141628; /* Háttérszín */
     color: #fff; /* Szövegszín */
     padding: 20px 0; /* Belső térköz a tartalom körül */
     text-align: center; /* Szöveg igazítása középre */
@@ -254,8 +295,9 @@ footer {
 }
 
 .list-item img {
-    width: 150px; /* Kép szélessége */
-    height: auto; /* Képarány megtartása */
+    width: 350px; /* Kép szélessége */
+    height: 250px; /* Képarány megtartása */
+    object-fit: cover;
     margin-right: 20px; /* Margó a kép jobb oldalán */
 }
 
@@ -272,3 +314,6 @@ footer {
     margin-top: 5px; /* Margó a leírás felett */
 
 }
+
+
+
