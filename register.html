@@ -41,17 +41,20 @@
 </div>
 <br><br>
 <div class="form-container">
-    <h2>Bejelentkezés</h2>
-    <form action="/login" method="post">
-        <input type="text" name="username" placeholder="Felhasználónév" required><br>
-        <input type="password" name="password" placeholder="Jelszó" required><br>
-        <input type="submit" value="Bejelentkezés">
+    <h2>Regisztráció</h2>
+    <form action="/register" method="post">
+        <input type="text" name="newUsername" placeholder="Új felhasználónév" required><br>
+        <input type="password" name="newPassword" placeholder="Új jelszó" required><br>
+        <input type="password" name="newPasswordConfirm" placeholder="Jelszó megerősítése" required><br>
+        <input type="text" name="newUsername" placeholder="Keresztnév" required><br>
+        <input type="text" name="newUsername" placeholder="Vezetéknév" required><br>
+        <input type="submit" value="Regisztráció">
     </form>
     <br><br>
     <hr class="separator">
     <br>
-    <p>Nincs még fiókod?<br><br>
-    <a href="register.html"><button class="search-button">Regisztrálj az oldalunkra!</button></a></p>
+    <p>Már rendelkezel fiókkal?<br><br>
+        <a href="login.html"><button class="search-button">Jelentkezz be itt!</button></a></p>
 </div>
 
 <br><br><br>

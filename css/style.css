@@ -370,5 +370,8 @@ footer {
     text-align: center;
 }
 
-
-
+.separator {
+    background-color: #000;
+    width: 60%;
+    height: 4px;
+}
