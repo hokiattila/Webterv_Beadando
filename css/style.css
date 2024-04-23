@@ -14,7 +14,7 @@
     z-index: 9999; /* Biztosítja, hogy felül legyen a tartalom felett */
 }
 #betolto img {
-    max-width: 100%; /* Az img szélessége legfeljebb 100% */
+    width: 15%; /* Az img szélessége legfeljebb 100% */
 }
 
 .mainimage-container {

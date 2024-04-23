@@ -33,7 +33,6 @@
     <!-- Menüpontok -->
     <div class="menu">
         <a href="#">Főoldal</a>
-        <a href="#">Galéria</a>
         <a href="#">Kapcsolat</a>
         <!-- mindenkepp dinamikus btn legyen -->
         <a href="#">Bejelentkezés</a>
@@ -50,7 +49,7 @@
         </div>
 
     <div class="button-container">
-        <button onclick="scrollToBottom()">Ismerd meg kínálatunkat!</button>
+        <a href="#filters"><button>Ismerd meg kínálatunkat!</button></a>
     </div>
 </div>
 <!-- 3 box -->
@@ -96,13 +95,13 @@
 </div>
 <!-- Kategória kiválasztás a kereséshez -->
 <div>
-<div class="centercontainer" >
+<div class="centercontainer" id="filters">
     <form>
         <div class="input-container">
     <div class="dropdown">
-        <button onclick="ClickedOnButton()" class="dropbtn">Márka</button>
+        <button onclick="ClickedOnButton1()" class="dropbtn" type="button">Márka</button>
         <div id="dropdownMarka" class="dropdown-content">
-            <input type="text" placeholder="Search.." id="inputMarka" onkeyup="filterFunction()">
+            <input type="text" placeholder="Keresés.." id="inputMarka" onkeyup="filterFunction('inputMarka','dropdownMarka')">
             <a href="#mercedes-benz">Mercedes-Benz</a>
             <a href="#audi">Audi</a>
             <a href="#ford">Ford</a>
@@ -113,16 +112,13 @@
         </div>
     </div>
     <div class="dropdown">
-        <button onclick="ClickedOnButton()" class="dropbtn">Modell</button>
+        <button onclick="ClickedOnButton2()" class="dropbtn" type="button">Modell</button>
         <div id="dropdownTipus" class="dropdown-content">
-            <input type="text" placeholder="Search.." id="inputTipus" onkeyup="filterFunction()">
-            <a href="#mercedes-benz">Mercedes-Benz</a>
-            <a href="#audi">Audi</a>
-            <a href="#ford">Ford</a>
-            <a href="#bmw">BMW</a>
-            <a href="#peugeot">Peugeot</a>
-            <a href="#suzuki">Suzuki</a>
-            <a href="#toyota">Toyota</a>
+            <input type="text" placeholder="Search.." id="inputTipus" onkeyup="filterFunction('inputTipus','dropdownTipus')">
+            <a href="#cclass">C osztály</a>
+            <a href="#cla">cla</a>
+            <a href="#sclass">S osztály</a>
+            <a href="#eqb">EQB</a>
         </div>
     </div>
 
@@ -211,15 +207,18 @@
 <script>
     /* When the user clicks on the button,
     toggle between hiding and showing the dropdown content */
-    function ClickedOnButton() {
+    function ClickedOnButton1() {
         document.getElementById("dropdownMarka").classList.toggle("show");
     }
+    function ClickedOnButton2() {
+        document.getElementById("dropdownTipus").classList.toggle("show");
+    }
 
-    function filterFunction() {
+    function filterFunction(inputid,dropdownid) {
         var input, filter, ul, li, a, i;
-        input = document.getElementById("inputMarka");
+        input = document.getElementById(inputid);
         filter = input.value.toUpperCase();
-        div = document.getElementById("dropdownMarka");
+        div = document.getElementById(dropdownid);
         a = div.getElementsByTagName("a");
         for (i = 0; i < a.length; i++) {
             txtValue = a[i].textContent || a[i].innerText;
@@ -231,6 +230,7 @@
         }
     }
 
+
 </script>
 <!-- Lefele görgetés gombra kattintva -->
 <script>
@@ -239,6 +239,37 @@
             top: document.body.scrollHeight,
             behavior: 'smooth'
         });
+    }
+</script>
+<!-- Esemenyfigyelo a dropdown lezárására -->
+<script>
+    function toggleDropdown() {
+        var dropdown = document.getElementById("dropdownMarka");
+        dropdown.classList.toggle("show");
+    }
+
+    function selectOption(option) {
+        // Ide teheted a kiválasztott opcióval kapcsolatos műveleteket
+        console.log("Kiválasztott opció:", option);
+        closeDropdown();
+    }
+
+    function closeDropdown() {
+        var dropdown = document.getElementById("dropdownMarka");
+        dropdown.classList.remove("show");
+    }
+
+    // Eseményfigyelő az oldal többi részére
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
     }
 </script>
 <footer>
