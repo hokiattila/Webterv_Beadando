@@ -6,6 +6,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/fooldal.css">
+    <link rel="stylesheet" href="css/listazas.css">
     <!-- Beállítások telefonos megjelenésekhez -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,10 +33,10 @@
 
     <!-- Menüpontok -->
     <div class="menu">
-        <a href="#">Főoldal</a>
-        <a href="#">Kapcsolat</a>
+        <a href="#" class="activenav">Főoldal</a>
+        <a href="contact.html">Kapcsolat</a>
         <!-- mindenkepp dinamikus btn legyen -->
-        <a href="#">Bejelentkezés</a>
+        <a href="login.html">Bejelentkezés</a>
     </div>
 </div>
 <div class="mainimage-container">
@@ -52,6 +53,7 @@
         <a href="#filters"><button>Ismerd meg kínálatunkat!</button></a>
     </div>
 </div>
+
 <!-- 3 box -->
 <div class="container">
     <div class="box">
@@ -72,6 +74,7 @@
             <div class="box-text">Állítsd be a számodra fontos preferenciákat, és találd meg a legjobban tetsző autót!</div>
         </div>
     </div>
+
 </div>
     <!-- Lapozható galéria -->
 
@@ -94,6 +97,7 @@
     </div>
 </div>
 <!-- Kategória kiválasztás a kereséshez -->
+<div><h1 class="center">Találd meg a számodra megfelelő autót!</h1><hr class="custom-hr"></div>
 <div>
 <div class="centercontainer" id="filters">
     <form>
@@ -130,7 +134,9 @@
     </form>
 </div>
 </div>
+
 <div class="centercontainer" >
+    <hr>
 <ul class="list">
     <!-- listaelemeket php-val megjeleníteni dinamikusan a dobott találatok alapján -->
     <a href="car.html">
@@ -164,6 +170,22 @@
             <p>Ár: 13,000,000 Ft</p>
         </div>
     </li></a>
+    <hr>
+    <!-- Majd itt jöhet a matek, a lényeg a design -->
+    <div class="pagination">
+        <button >Előző</button>
+        <button >1</button>
+        <button >2</button>
+        <button >3</button>
+        <button >4</button>
+        <button >5</button>
+        <button >6</button>
+        <button >7</button>
+        <button >8</button>
+        <button >9</button>
+        <button >10</button>
+        <button >Következő</button>
+    </div>
 </ul>
 </div>
 <!-- Ha lesz elég content ez majd törlendő! -->

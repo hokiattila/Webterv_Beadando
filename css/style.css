@@ -130,6 +130,10 @@ body {
     display: none;
 }
 
+.activenav {
+    font-weight: bold;
+}
+
 /* Aktív dia megjelenítése */
 .active {
     display: block;
@@ -228,6 +232,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+
 
 /* Dropdown menu */
 .dropbtn {
@@ -353,7 +358,17 @@ footer {
 
 }
 
+.custom-hr {
+    border: 0;
+    height: 3px;
+    background-color: #333;
+    margin: 20px auto;
+    max-width: 200px;
+}
 
+.center {
+    text-align: center;
+}
 
 
 
