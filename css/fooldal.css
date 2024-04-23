@@ -32,7 +32,27 @@
 }
 
 a {
-    text-decoration: none; /* Keresztülhúzás eltávolítása */
-    color: inherit; /* Az örökölt szövegszín használata */
+    /*text-decoration: none; /* Keresztülhúzás eltávolítása */
+    /*color: inherit; /* Az örökölt szövegszín használata */
     cursor: pointer; /* Mutató ikon megjelenítése */
+}
+
+.star {
+    margin-top: auto;
+    margin-left: auto;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.star img {
+    width: 3em;
+    height: auto;
+}
+
+.star img:hover {
+    opacity:0.4;
+}
+
+.star img:active {
+    opacity:0.1;
 }

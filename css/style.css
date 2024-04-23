@@ -337,11 +337,13 @@ footer {
     padding: 20px;
 }
 
-.list-item img {
+.list-itemkep {
     width: 350px; /* Kép szélessége */
     height: 250px; /* Képarány megtartása */
     object-fit: cover;
     margin-right: 20px; /* Margó a kép jobb oldalán */
+    border-radius: 10px;
+    border: 3px solid #CCC;
 }
 
 .list-item-content {
