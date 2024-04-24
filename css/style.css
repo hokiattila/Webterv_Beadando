@@ -350,6 +350,10 @@ footer {
     flex: 1; /* Rugalmas növekedés a tartalomra */
 }
 
+.cimpluszkedvenc {
+    display: flex; /* Flexbox layout */
+}
+
 .list-item-content h3 {
     margin-top: 0; /* Margó eltávolítása a cím fölött */
     font-size: 20px; /* Cím betűmérete */
@@ -376,4 +380,9 @@ footer {
     background-color: #000;
     width: 60%;
     height: 4px;
+}
+.separator2 {
+    background-color: #666;
+    width: 100%;
+    height: 2px;
 }

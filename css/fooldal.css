@@ -44,6 +44,10 @@ a {
     cursor: pointer;
 }
 
+.cartitle {
+    width: 50%;
+    display: flex;
+}
 .star img {
     width: 3em;
     height: auto;
@@ -55,4 +59,14 @@ a {
 
 .star img:active {
     opacity:0.1;
+}
+
+.tag1 {
+    background-color: #0d81cd22;
+}
+.tag2 {
+    background-color: #ffd70033;
+}
+.tag3 {
+    background-color: #FF000033;
 }
