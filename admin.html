@@ -47,10 +47,11 @@
 <div><h2 class="center">Üdv újra itt {felhasznalonev}!</h2>
     <hr class="custom-hr">
     <nav class="submenu">
-        <a href="#kedvencek" class="activenav">Kedvencek</a>
-        <a href="#feltoltes">Autó feltöltése</a>
+        <a href="#kedvencek" class="activenav">Kedvencek</a> |
+        <a href="#feltoltes">Autó feltöltése</a> |
+        <a href="#sajat">Saját járművek</a>
     </nav>
-    <div class="bezarhato">
+
         <!-- favorites div megjelenítése ha a kedvencek menüpont az aktív -->
     <div class="favorites">
     <ul class="list">
@@ -124,7 +125,7 @@
     </ul>
     </div>
 </div>
-</div>
+
 
 <!-- Időpontfoglalás: offoljuk -->
 
@@ -133,8 +134,8 @@
 <form class="form-container" action="feldolgozo_oldal.php" method="post" enctype="multipart/form-data">
     <div class="form-left">
         <div class="centeredupload">
-        <label class="form-label" for="image">Kép(ek) kiválasztása:</label>
-        <input class="file-input" type="file" id="image" name="image" accept="image/*"></div>
+        <label class="form-label" for="image" >Kép(ek) kiválasztása:</label>
+        <input class="file-input" type="file" id="image" name="image" accept="image/*" multiple></div>
         <div class="dropdown">
             <button onclick="ClickedOnButton1('dropdownUzemanyag')" class="dropbtn" type="button">Üzemanyag</button>
             <div id="dropdownUzemanyag" class="dropdown-content">
@@ -156,13 +157,16 @@
                 <a href="#totalkar">Totálkár</a>
             </div>
         </div>
-        <label class="form-label" for="marka">Márka:</label>
-        <input class="form-input" type="text" id="marka" name="name">
-        <label class="form-label" for="tipus">Típus</label>
-        <input class="form-input" type="text" id="tipus" name="name">
+
 
     </div>
     <div class="form-right">
+        <label class="form-label" for="marka">Márka:</label>
+        <input class="form-input" type="text" id="marka" name="name">
+
+        <label class="form-label" for="tipus">Típus</label>
+        <input class="form-input" type="text" id="tipus" name="name">
+
         <label class="form-label" for="name">Név:</label>
         <input class="form-input" type="text" id="name" name="name">
 
@@ -171,14 +175,55 @@
 
         <label class="form-label" for="message">Egyedi leírás az autóról:</label>
         <textarea class="form-input" id="message" name="message"></textarea>
-        <input class="submit-button" type="submit" value="Submit">
+        <input class="submit-button" type="submit" value="Feltöltés">
     </div>
 
 
 </form>
+
 <br><br><br>
 
+<!-- sajat feltoltesek. Szerkeszteni nem lehet csak levenni es ujra feltenni. -->
+<div class="favorites">
+    <ul class="list">
+        <!-- listaelemeket php-val megjeleníteni dinamikusan a dobott találatok alapján -->
 
+        <li class="list-item">
+
+            <a href="car.html"><img class="list-itemkep" src="img/cars/cla/cla1.jpg" alt="Kép 3"></a>
+            <div class="list-item-content">
+                <div class="cimpluszkedvenc"><a href="car.html" ><h3>Mercedes-Benz CLA-180</h3> <!-- brand + modell típus --></a><div class="star"><img src="img/x_button.png" alt="Eltávolítás a kedvencekből"></div></div>
+                <p><i class="tag1">2016</i>&nbsp&nbsp<i class="tag1">4 ajtós</i>&nbsp&nbsp<i class="tag1">Fekete</i></p>
+                <p><i class="tag2">180 LE</i>&nbsp&nbsp<i class="tag2">Benzin</i></p>
+                <p><i class="tag3">Újszerű</i></p>
+
+                <p>Rövid leírás 3.</p>
+                <hr>
+                <p><b>Ár: 13,000,000 Ft</b></p>
+            </div>
+
+        </li>
+
+            <hr>
+            <!-- Majd itt jöhet a matek, a lényeg a design -->
+            <div class="pagination">
+                <button >Előző</button>
+                <button >1</button>
+                <button >2</button>
+                <button >3</button>
+                <button >4</button>
+                <button >5</button>
+                <button >6</button>
+                <button >7</button>
+                <button >8</button>
+                <button >9</button>
+                <button >10</button>
+                <button >Következő</button>
+            </div>
+            <br>
+    </ul>
+</div>
+</div>
 
 
 <!-- Galléria aktív kép -->
