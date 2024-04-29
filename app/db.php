@@ -1,8 +1,8 @@
 <?php
 class DatabaseInteractions {
     private string $servername = "localhost";
-    private string $username = "root";
-    private string $password = "";
+    private string $username = "isten";
+    private string $password = "istenjelszo123";
     private int $port = 3306;
     private string $database = "web1_project";
 
@@ -74,14 +74,14 @@ class DatabaseInteractions {
                     $conn->exec($sql);
                 }
                 $stmt  = $conn->prepare("INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?)");
-                $stmt->execute(["admin",password_hash("admin", PASSWORD_DEFAULT), "admin", "Admin", "Admin", date('Y-m-d'), "Férfi", date('Y-m-d'), "1","admin@carsales.com"]);
+                $stmt->execute(["admin",password_hash("adminjelszo123#", PASSWORD_DEFAULT), "admin", "Admin", "Admin", date('Y-m-d'), "Férfi", date('Y-m-d'), "1","admin@carsales.com"]);
 
-                $stmt = $conn->prepare("INSERT INTO cars VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
-                $stmt->execute(["NULL", "Peugeot", "206", date('Y-m-d', strtotime('2004-05-22')), "5","fehér", "1","110","Újszerű","Benzin", "400000", "SADJN3331JNCDS"]);
-                $stmt->execute(["NULL", "BMW", "M3", date('Y-m-d', strtotime('2011-05-22')), "5","fekete", "2","220","Viseltes","Diesel", "1200000", "ASDFASD23232323"]);
-                $stmt->execute(["NULL", "Mercedes-Benz", "CLA", date('Y-m-d', strtotime('2017-02-12')), "5","fekete", "3","180","Új","Benzin", "13000000", "FKNGMDFJKGNDJF232"]);
-                $stmt->execute(["NULL", "Audi", "R8", date('Y-m-d', strtotime('2002-05-22')), "5","szürke", "1","110","Totálkár","Benzin", "120000", "SDGFDFSGSFDG33"]);
-                $stmt->execute(["NULL", "Mazda", "RX7", date('Y-m-d', strtotime('1992-05-22')), "5","fehér", "1","110","Újszerű","Benzin", "500000", "SGFSDGDFSG"]);
+                $stmt = $conn->prepare("INSERT INTO cars VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+                $stmt->execute(["Peugeot", "206", date('Y-m-d', strtotime('2004-05-22')), "5","fehér", "1","110","Újszerű","Benzin", "400000", "SADJN3331JNCDS"]);
+                $stmt->execute(["BMW", "M3", date('Y-m-d', strtotime('2011-05-22')), "5","fekete", "2","220","Viseltes","Diesel", "1200000", "ASDFASD23232323"]);
+                $stmt->execute(["Mercedes-Benz", "CLA", date('Y-m-d', strtotime('2017-02-12')), "5","fekete", "3","180","Új","Benzin", "13000000", "FKNGMDFJKGNDJF232"]);
+                $stmt->execute(["Audi", "R8", date('Y-m-d', strtotime('2002-05-22')), "5","szürke", "1","110","Totálkár","Benzin", "120000", "SDGFDFSGSFDG33"]);
+                $stmt->execute(["Mazda", "RX7", date('Y-m-d', strtotime('1992-05-22')), "5","fehér", "1","110","Újszerű","Benzin", "500000", "SGFSDGDFSG"]);
             }
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
@@ -129,17 +129,83 @@ class DatabaseInteractions {
     }
 
     public function fetchBrandNames() : array|bool {
-        return  false;
+        $pdo = $this->dbConnection();
+        $sql = "SELECT DISTINCT brand FROM cars";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getDistinctBrands() : array|bool {
-        return false;
+    public function checkVIN(string $vin) : bool {
+        $pdo = $this->dbConnection();
+        $sql = "SELECT * FROM cars WHERE vin=:vin";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':vin', $vin, PDO::PARAM_STR);
+        $stmt->execute();
+        if($stmt->rowCount() == 0) return false;
+        return true;
+    }
+
+    public function fetchIndividualCar($vin) : array|bool {
+        $pdo = $this->dbConnection();
+        $sql = "SELECT * FROM cars WHERE vin = :vin";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':vin', $vin, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
-    public function insertCar(array $carDetails) : void {
-
+    public function insertFavorite($user, $vin) : void {
+        $pdo = $this->dbConnection();
+        $sql = "INSERT INTO favorites(username, car_VIN, fav_date) VALUES (?,?,?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$user, $vin, date('Y-m-d')]);
     }
 
+    public function fetchFavoritesByUser($username): array|bool {
+        $pdo = $this->dbConnection();
+        $sql = "SELECT car_VIN FROM favorites WHERE username = :username";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function removeFavoriteRecord($username, $vin) : void{
+        $pdo = $this->dbConnection();
+        $sql = "DELETE FROM favorites WHERE username=:username and car_VIN=:vin";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':vin', $vin, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function fetchFavoriteCarData($username) : array|bool {
+        $pdo = $this->dbConnection();
+        $sql = "SELECT * FROM cars INNER JOIN favorites ON car_VIN = VIN WHERE username=:username";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function insertCar($vin, $brand, $modell, $build_year, $door_count, $color, $weight, $power, $con, $fuel_type, $price) : void {
+        $pdo = $this->dbConnection();
+	$date = new DateTime($build_year);
+	$year = $date->format('Y');
+	$yearInt = (int)$year;
+        $sql = "INSERT INTO cars(brand, modell, build_year, door_count, color, weight, power, con, fuel_type, price, VIN) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$brand, $modell, $yearInt, $door_count, $color, $weight, $power, $con, $fuel_type, $price, $vin]);
+    }
+
+    public function deleteCar($vin) : void {
+        $pdo = $this->dbConnection();
+        $sql = "DELETE FROM cars WHERE VIN = :vin";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':vin', $vin, PDO::PARAM_STR);
+        $stmt->execute();
+    }
 
 }
